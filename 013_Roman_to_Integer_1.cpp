@@ -1,7 +1,7 @@
 class Solution {
 public:
     int romanToInt(string s) {
-        unordered_map<char, int> m = {
+        static unordered_map<char, int> m = {
             { 'I', 1 },
             { 'V', 5 },
             { 'X', 10 },
