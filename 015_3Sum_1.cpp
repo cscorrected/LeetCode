@@ -5,19 +5,22 @@ public:
         vector<vector<int>> res;
         auto v = nums;
         sort(v.begin(), v.end());
-        for (int i = 0; i < v.size(); ++i) {
+        int n = v.size();
+        for (int i = 0; i < n - 2; ++i) {
             if (i > 0 && v[i] == v[i - 1]) continue;
-            int j = i + 1, k = v.size() - 1;
-            while (j < k) {
-                int sum = v[i] + v[j] + v[k];
+            if (v[i] + v[i + 1] + v[i + 2] > 0) break;
+            if (v[i] + v[n - 2] + v[n - 1] < 0) continue;
+            int l = i + 1, r = n - 1;
+            while (l < r) {
+                int sum = v[i] + v[l] + v[r];
                 if (sum < 0) {
-                    ++j;
+                    ++l;
                 } else if (sum > 0) {
-                    --k;
+                    --r;
                 } else {
-                    res.push_back({ v[i], v[j], v[k] });
-                    for (++j; j < k && v[j] == v[j - 1]; ++j) continue;
-                    for (--k; j < k && v[k] == v[k + 1]; --k) continue;
+                    res.push_back({ v[i], v[l], v[r] });
+                    for (++l; l < r && v[l] == v[l - 1]; ++l) continue;
+                    for (--r; l < r && v[r] == v[r + 1]; --r) continue;
                 }
             }
         }
